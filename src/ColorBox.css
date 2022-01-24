@@ -66,7 +66,7 @@
 	width: 100%;
 	height: 100%;
 	transition: transform 0.6s ease-in-out;
-	transform: scale(0.1);
+	transform: scale(0);
 }
 
 .copy-overlay.show {
@@ -87,7 +87,7 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 4rem;
-	transform: scale(0.1);
+	transform: scale(0);
 	opacity: 0;
 	color: white;
 }
@@ -113,4 +113,16 @@
 .copy-msg p {
 	font-size: 2rem;
 	font-weight: 100;
+}
+
+@keyframes grow {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(50);
+	}
+	100% {
+		transform: scale(0);
+	}
 }
