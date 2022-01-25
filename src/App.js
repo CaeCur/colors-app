@@ -20,7 +20,16 @@ function App () {
 				path="/palette/:id"
 				render={(routeProps) => <Palette palette={generatePalette(findPalette(routeProps.match.params.id))} />}
 			/>
-			<Route path="/palette/:paletteId/:colorId" component={SingleColor} />
+			<Route
+				exact
+				path="/palette/:paletteId/:colorId"
+				render={(routeProps) => (
+					<SingleColor
+						id={routeProps.match.params.colorId}
+						palette={generatePalette(findPalette(routeProps.match.params.paletteId))}
+					/>
+				)}
+			/>
 		</Switch>
 	);
 }
