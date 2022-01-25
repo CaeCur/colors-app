@@ -47,7 +47,7 @@ export default class PaletteList extends Component {
 			<Box component="div" sx={styles.root}>
 				<Box component="div" sx={styles.container}>
 					<Box component="nav" sx={styles.nav}>
-						<h1>Home Page</h1>
+						<h1>PalettePal</h1>
 					</Box>
 					<Box component="div" sx={styles.palettes}>
 						{paletteTiles}
