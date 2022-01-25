@@ -34,7 +34,9 @@ export default class Navbar extends Component {
 		return (
 			<nav className="Navbar">
 				<div className="logo">
-					<Link to="/">PalettePal</Link>
+					<Link to="/">
+						<b>Palette</b>Pal
+					</Link>
 				</div>
 
 				<div className="slider-container">
