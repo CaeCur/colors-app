@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PaletteTile from "./PaletteTile";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 
 const styles = {
 	root      : {
@@ -33,14 +34,20 @@ const styles = {
 };
 
 export default class PaletteList extends Component {
+	constructor (props) {
+		super(props);
+		this.goToPalette = this.goToPalette.bind(this);
+	}
+
+	goToPalette (id) {
+		this.props.history.push(`/palette/${id}`);
+	}
+
 	render () {
 		const { palettes } = this.props;
 
 		const paletteTiles = palettes.map((palette) => (
-			// <p>
-			// 	<Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
-			// </p>
-			<PaletteTile {...palette} />
+			<PaletteTile key={palette.id} {...palette} goToPalette={this.goToPalette} />
 		));
 
 		return (
