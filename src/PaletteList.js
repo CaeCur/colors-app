@@ -10,6 +10,11 @@ export default class PaletteList extends Component {
 				<Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
 			</p>
 		));
-		return <div>{paletteTiles}</div>;
+		return (
+			<div>
+				<h1>Home Page</h1>
+				<div>{paletteTiles}</div>
+			</div>
+		);
 	}
 }
