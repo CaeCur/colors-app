@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import Navbar from "./Navbar";
 import ColorBox from "./ColorBox";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
 
 export default class SingleColor extends Component {
 	constructor (props) {
 		super(props);
+		this.state = { format: "hex" };
 		this._shades = this.gatherShades(this.props.palette, this.props.id);
+		this.changeFormat = this.changeFormat.bind(this);
 	}
 
 	gatherShades (palette, colorToFilter) {
@@ -18,24 +23,45 @@ export default class SingleColor extends Component {
 		return shades.slice(1);
 	}
 
+	changeFormat (format) {
+		console.log(format);
+		this.setState({ format });
+	}
+
+	capitalizeFirstLetter (string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	render () {
-		console.log(this._shades);
+		const { format } = this.state;
+		const { id, palette } = this.props;
+		const { paletteName, emoji } = palette;
 
 		const colorBoxes = this._shades.map((color) => (
 			<ColorBox
 				key={color.name}
-				paletteId={this.props.palette}
+				paletteId={palette}
 				id={color.id}
-				background={color.hex}
+				background={color[format]}
 				name={color.name}
 				showMore={false}
 			/>
 		));
 
 		return (
-			<div className="Palette">
-				{<h1>Single Color Palette for {this.props.palette.paletteName}</h1>}
-				<div className="Palette-colors">{colorBoxes}</div>
+			<div className="SingleColorPalette Palette">
+				<Navbar showSlider={false} changeFormat={this.changeFormat} />
+
+				<div className="Palette-colors">
+					{colorBoxes}
+					<div className="go-back ColorBox">
+						<Link to={`/palette/${palette.id}`} className="back-btn">
+							Go Back
+						</Link>
+					</div>
+				</div>
+
+				<Footer paletteName={`${paletteName} - ${this.capitalizeFirstLetter(id)}`} emoji={emoji} />
 			</div>
 		);
 	}

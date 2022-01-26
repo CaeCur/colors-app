@@ -39,17 +39,19 @@ export default class Navbar extends Component {
 					</Link>
 				</div>
 
-				<div className="slider-container">
-					<span>Level: {level}</span>
-					<Slider
-						className="slider"
-						defaultValue={level}
-						min={100}
-						max={900}
-						step={100}
-						onAfterChange={changeLevel}
-					/>
-				</div>
+				{this.props.showSlider && (
+					<div className="slider-container">
+						<span>Level: {level}</span>
+						<Slider
+							className="slider"
+							defaultValue={level}
+							min={100}
+							max={900}
+							step={100}
+							onAfterChange={changeLevel}
+						/>
+					</div>
+				)}
 
 				<FormControl variant="standard" sx={{ ml: "auto", mr: "1rem", minWidth: 100 }}>
 					<Select value={format} onChange={this.changeFormat}>
