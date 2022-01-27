@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import { FormControl, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Slider from "rc-slider";
+import Slider, { SliderTooltip } from "rc-slider";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ export default class Navbar extends Component {
 	constructor (props) {
 		super(props);
 		this.state = { format: "hex", snackOpen: false };
+
 		this.changeFormat = this.changeFormat.bind(this);
 		this.closeSnackbar = this.closeSnackbar.bind(this);
 	}
@@ -31,23 +32,47 @@ export default class Navbar extends Component {
 		const { level, changeLevel } = this.props;
 		const { format } = this.state;
 
+		// give slider a tooltip
+		const { Handle } = Slider;
+
+		const handle = (props) => {
+			const { value, dragging, index, ...restProps } = props;
+			return (
+				<SliderTooltip
+					prefixCls="rc-slider-tooltip"
+					overlay={`${value} %`}
+					visible={dragging}
+					placement="top"
+					key={index}
+				>
+					<Handle value={value} {...restProps} />
+				</SliderTooltip>
+			);
+		};
+		//end slider tooltip
+
 		return (
 			<nav className="Navbar">
 				<div className="logo">
-					<Link to="/">PalettePal</Link>
+					<Link to="/">
+						<b>Palette</b>Pal
+					</Link>
 				</div>
 
-				<div className="slider-container">
-					<span>Level: {level}</span>
-					<Slider
-						className="slider"
-						defaultValue={level}
-						min={100}
-						max={900}
-						step={100}
-						onAfterChange={changeLevel}
-					/>
-				</div>
+				{this.props.showSlider && (
+					<div className="slider-container">
+						<span>Level: {level}</span>
+						<Slider
+							className="slider"
+							defaultValue={level}
+							min={100}
+							max={900}
+							step={100}
+							onAfterChange={changeLevel}
+							handle={handle}
+						/>
+					</div>
+				)}
 
 				<FormControl variant="standard" sx={{ ml: "auto", mr: "1rem", minWidth: 100 }}>
 					<Select value={format} onChange={this.changeFormat}>
