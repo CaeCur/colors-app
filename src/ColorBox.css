@@ -4,7 +4,7 @@
 	margin: 0 auto;
 	display: inline-block;
 	position: relative;
-	cursor: grab;
+	cursor: auto;
 	margin-bottom: -4px;
 }
 
