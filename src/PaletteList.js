@@ -22,7 +22,11 @@ const styles = {
 		display        : "flex",
 		width          : "100%",
 		justifyContent : "space-between",
-		color          : "white"
+		alignItems     : "center",
+		color          : "white",
+		"& a"          : {
+			color : "white"
+		}
 	},
 	palettes  : {
 		boxSizing           : "border-box",
@@ -55,6 +59,7 @@ export default class PaletteList extends Component {
 				<Box component="div" sx={styles.container}>
 					<Box component="nav" sx={styles.nav}>
 						<h1>PalettePal</h1>
+						<Link to="/palette/new">new palette</Link>
 					</Box>
 					<Box component="div" sx={styles.palettes}>
 						{paletteTiles}
